@@ -67,7 +67,7 @@ export default function App() {
       {images.length > 0 && <ImageGallery items={images} isOpen={openModal} />}
       {images.length > 0 && !isLoading && <LoadMoreBtn onClick={handleLoadMore} />}
       {isLoading && <Loader />}
-      {isModal && <ImageModal isOpen={isModal} onClose={closeModal} content={selectedImage} />}
+      {selectedImage && <ImageModal isOpen={isModal} onClose={closeModal} content={selectedImage} />}
       </div>
     
     
