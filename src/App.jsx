@@ -3,7 +3,11 @@ import './App.css'
 import SearchBar from './components/SearchBar/SearchBar'
 import ImageGallery from './components/ImageGallery/ImageGallery'
 import { fetchImages } from './image-api'
-import { Toaster } from 'react-hot-toast';
+
+import Loader from './components/Loader/Loader'
+import ErrorMessage from './components/ErrorMessage/ErrorMessage'
+import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn'
+import ImageModal from './components/ImageModal/ImageModal'
 
 export default function App() {
   const [query, setQuery] = useState("");
@@ -11,6 +15,8 @@ export default function App() {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [isModal, setIsModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState({});
   
 
   useEffect(() => {
@@ -45,15 +51,23 @@ export default function App() {
     setPage(page + 1);
   }
 
+  const openModal = (value) => {
+    setIsModal(true)
+    setSelectedImage(value)
+  }
+
+  const closeModal = () => {
+    setIsModal(false)
+  }
+
   return (
     <div className='container'>
       <SearchBar onSubmit={handleSearch} />
-      
-      {error && <b>Oops! Error! Reload!</b>}
-      {images.length > 0 && <ImageGallery items={images} />}
-      {images.length > 0 && !isLoading && <button onClick={handleLoadMore}>Load more</button>}
-      {isLoading && <b>Loading...</b>}
-      <Toaster />
+      {error && <ErrorMessage />}
+      {images.length > 0 && <ImageGallery items={images} isOpen={openModal} />}
+      {images.length > 0 && !isLoading && <LoadMoreBtn onClick={handleLoadMore} />}
+      {isLoading && <Loader />}
+      {isModal && <ImageModal isOpen={isModal} onClose={closeModal} content={selectedImage} />}
       </div>
     
     

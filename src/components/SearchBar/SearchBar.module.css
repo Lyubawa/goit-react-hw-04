@@ -1,0 +1,41 @@
+.header{
+    background-color: blue;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.box {
+    position: relative;
+
+}
+
+.icon {
+    position: absolute;
+    left: 8px;
+    transform: translateY(35%);
+}
+
+.input{
+    border: 1px solid black;
+    border-radius: 4px;
+    padding-left: 26px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    margin-right: 10px;
+    font-size: medium;
+    color: gray;
+}
+.input:focus {
+    outline: none;
+}
+
+.btn {
+    border: 1px solid black;
+    border-radius: 4px;
+    font-size: medium;
+    cursor: pointer;
+}
